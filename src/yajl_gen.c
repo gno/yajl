@@ -97,11 +97,11 @@ yajl_gen_alloc2(const yajl_print_t callback,
     memcpy((void *) &(g->alloc), (void *) afs, sizeof(yajl_alloc_funcs));
 
     if (config) {
-        char *indent = config->indentString;
+        const char *indent = config->indentString;
         g->pretty = config->beautify;
         g->indentString = config->indentString;
         if (indent) {
-          for (indent; *indent; indent++) {
+          for (; *indent; indent++) {
             if (*indent != '\n'
                 && *indent != '\v'
                 && *indent != '\f'
@@ -158,7 +158,7 @@ yajl_gen_free(yajl_gen g)
 
 #define ENSURE_NOT_KEY \
     if (g->state[g->depth] == yajl_gen_map_key ||       \
-        g->state[g->depth] == yajl_gen_map_start)  {    \   
+        g->state[g->depth] == yajl_gen_map_start)  {    \
         return yajl_gen_keys_must_be_strings;           \
     }                                                   \
 
